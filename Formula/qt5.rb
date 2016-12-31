@@ -54,6 +54,14 @@ class Qt5 < Formula
     sha256 "48ff18be2f4050de7288bddbae7f47e949512ac4bcd126c2f504be2ac701158b"
   end
 
+  # Fix mkspec cmake config to use absolute install path (in cellar)
+  # instead of relative path
+  # This allows the unlinked mkspec files to be found
+  patch do
+    url "https://gist.githubusercontent.com/scpeters/d8ec8c1bd4c16f03084a696b47ba6383/raw/167e6e7cae9c02800e9b09b3b27ef14901a853f0/qt5_cmake_find2.diff"
+    sha256 "6cc7f2666197f40468a74afd4352cf8f7d7fe220de9aee7d2455d083566073e8"
+  end
+
   def install
     args = %W[
       -verbose
