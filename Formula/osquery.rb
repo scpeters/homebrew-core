@@ -1,9 +1,8 @@
 class Osquery < Formula
   desc "SQL powered operating system instrumentation and analytics"
   homepage "https://osquery.io"
-  url "https://github.com/facebook/osquery/archive/3.3.2.tar.gz"
-  sha256 "74280181f45046209053a3e15114d93adc80929a91570cc4497931cfb87679e4"
-  revision 5
+  url "https://github.com/facebook/osquery/archive/3.4.0.tar.gz"
+  sha256 "f1a1a4ea29c891a1a2509d9727f2fb66d5fdda184d75ecf293bf18fcb59e92da"
 
   bottle do
     cellar :any
@@ -55,13 +54,6 @@ class Osquery < Formula
   resource "aws-sdk-cpp" do
     url "https://github.com/aws/aws-sdk-cpp/archive/1.4.55.tar.gz"
     sha256 "0a70c2998d29cc4d8a4db08aac58eb196d404073f6586a136d074730317fe408"
-  end
-
-  # Upstream fix for boost 1.69, remove in next version
-  # https://github.com/facebook/osquery/pull/5496
-  patch do
-    url "https://github.com/facebook/osquery/commit/130b3b3324e2.diff?full_index=1"
-    sha256 "46bce0c62f1a8f0df506855049991e6fceb6d1cc4e1113a2f657e76b5c5bdd14"
   end
 
   def install
