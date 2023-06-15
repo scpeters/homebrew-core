@@ -1,11 +1,10 @@
 class ProtobufC < Formula
   desc "Protocol buffers library"
   homepage "https://github.com/protobuf-c/protobuf-c"
-  # TODO: Check if we can use unversioned `protobuf` at version bump
   url "https://github.com/protobuf-c/protobuf-c/releases/download/v1.4.1/protobuf-c-1.4.1.tar.gz"
   sha256 "4cc4facd508172f3e0a4d3a8736225d472418aee35b4ad053384b137b220339f"
   license "BSD-2-Clause"
-  revision 2
+  revision 3
 
   bottle do
     sha256 cellar: :any,                 arm64_ventura:  "7faeb770aed57e27102f2376d93ae7e82834d3dc672bdea3eeebe50354d800e9"
@@ -18,7 +17,7 @@ class ProtobufC < Formula
   end
 
   depends_on "pkg-config" => :build
-  depends_on "protobuf@21" # https://github.com/protobuf-c/protobuf-c/issues/544
+  depends_on "protobuf"
 
   def install
     ENV.cxx11
@@ -42,6 +41,6 @@ class ProtobufC < Formula
       }
     EOS
     (testpath/"test.proto").write testdata
-    system Formula["protobuf@21"].opt_bin/"protoc", "test.proto", "--c_out=."
+    system Formula["protobuf"].opt_bin/"protoc", "test.proto", "--c_out=."
   end
 end
