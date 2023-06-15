@@ -1,11 +1,11 @@
 class ApacheArrow < Formula
   desc "Columnar in-memory analytics layer designed to accelerate big data"
   homepage "https://arrow.apache.org/"
-  # TODO: Check if we can use unversioned `grpc` and `protobuf` at version bump
   url "https://www.apache.org/dyn/closer.lua?path=arrow/arrow-12.0.1/apache-arrow-12.0.1.tar.gz"
   mirror "https://archive.apache.org/dist/arrow/arrow-12.0.1/apache-arrow-12.0.1.tar.gz"
   sha256 "3481c411393aa15c75e88d93cf8315faf7f43e180fe0790128d3840d417de858"
   license "Apache-2.0"
+  revision 1
   head "https://github.com/apache/arrow.git", branch: "main"
 
   bottle do
@@ -25,10 +25,10 @@ class ApacheArrow < Formula
   depends_on "brotli"
   depends_on "bzip2"
   depends_on "glog"
-  depends_on "grpc@1.54"
+  depends_on "grpc"
   depends_on "lz4"
   depends_on "openssl@1.1"
-  depends_on "protobuf@21"
+  depends_on "protobuf"
   depends_on "rapidjson"
   depends_on "re2"
   depends_on "snappy"
