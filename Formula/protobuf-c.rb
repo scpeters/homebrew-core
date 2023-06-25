@@ -16,15 +16,28 @@ class ProtobufC < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux:   "68cbaee2214be0208918ae530369e455627e6f7ffe8cb3f9f662ff78131be7ed"
   end
 
+  head do
+    url "https://github.com/protobuf-c/protobuf-c.git", branch: "master"
+    depends_on "asciidoc" => :build
+    depends_on "autoconf" => :build
+    depends_on "automake" => :build
+    depends_on "libtool" => :build
+  end
+
   depends_on "pkg-config" => :build
   depends_on "protobuf"
 
-  def install
-    ENV.cxx11
+  patch do
+    # Fix for building with new protobuf
+    url "https://github.com/protobuf-c/protobuf-c/pull/556.patch?full_index=1"
+    sha256 "34f456ebdf7b971005089e4a3ff03c0e3aa6ca64fbaa069ed5e3c58a1704b9f2"
+  end
 
+  def install
     # https://github.com/protocolbuffers/protobuf/issues/9947
     ENV.append_to_cflags "-DNDEBUG"
 
+    system "./autogen.sh" if build.head?
     system "./configure", "--disable-dependency-tracking", "--prefix=#{prefix}"
     system "make", "install"
   end
