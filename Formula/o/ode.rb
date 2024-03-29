@@ -4,6 +4,7 @@ class Ode < Formula
   url "https://bitbucket.org/odedevs/ode/downloads/ode-0.16.5.tar.gz"
   sha256 "ba875edd164570958795eeaa70f14853bfc34cc9871f8adde8da47e12bd54679"
   license any_of: ["LGPL-2.1-or-later", "BSD-3-Clause"]
+  revision 1
   head "https://bitbucket.org/odedevs/ode.git", branch: "master"
 
   bottle do
@@ -27,6 +28,7 @@ class Ode < Formula
   def install
     args = []
     args << "-DOPENGL_INCLUDE_DIR=#{Formula["mesa"].include}" if OS.linux?
+    args << "-DODE_WITH_LIBCCD=ON"
 
     system "cmake", "-S", ".", "-B", "build", *args, *std_cmake_args
     system "cmake", "--build", "build"
