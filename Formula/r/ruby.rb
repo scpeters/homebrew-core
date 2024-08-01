@@ -153,11 +153,19 @@ class Ruby < Formula
     # Since Gem ships Bundle we want to provide that full/expected installation
     # but to do so we need to handle the case where someone has previously
     # installed bundle manually via `gem install`.
-    rm(%W[
-      #{rubygems_bindir}/bundle
-      #{rubygems_bindir}/bundler
-    ])
-    rm_r(Dir[HOMEBREW_PREFIX/"lib/ruby/gems/#{api_version}/gems/bundler-*"])
+    begin
+      rm(%W[
+        #{rubygems_bindir}/bundle
+        #{rubygems_bindir}/bundler
+      ])
+    rescue Errno::ENOENT
+      # The files don't exist, which is fine.
+    end
+    begin
+      rm_r(Dir[HOMEBREW_PREFIX/"lib/ruby/gems/#{api_version}/gems/bundler-*"])
+    rescue Errno::ENOENT
+      # The files don't exist, which is fine.
+    end
     rubygems_bindir.install_symlink Dir[libexec/"gembin/*"]
 
     # Customize rubygems to look/install in the global gem directory
